@@ -82,52 +82,93 @@ fun JoystickView(
         Canvas(modifier = Modifier.size(size)) {
             val center = Offset(size.toPx() / 2f, size.toPx() / 2f)
             val outerRadius = size.toPx() / 2f
-            val innerRadius = outerRadius * 0.35f
+            val innerRadius = outerRadius * 0.45f
 
-            // Outer ring with cybernetic glow
+            // Outer ring: Matte dark background with a subtle Xbox Green outer highlight
             drawCircle(
                 brush = Brush.radialGradient(
-                    colors = listOf(Color(0x3300F0FF), Color(0x0500F0FF)),
+                    colors = listOf(Color(0x1510B981), Color(0x0210B981)),
                     center = center,
                     radius = outerRadius
                 ),
                 radius = outerRadius,
                 center = center
             )
+            // Outer bezel
             drawCircle(
-                color = Color(0xFF00F0FF),
+                color = Color(0xFF27272A),
                 radius = outerRadius,
                 center = center,
-                style = Stroke(width = 2.dp.toPx())
+                style = Stroke(width = 3.dp.toPx())
             )
+            // Thin inner guide line
             drawCircle(
-                color = Color(0x3300F0FF),
-                radius = outerRadius - 4.dp.toPx(),
+                color = Color(0xFF10B981).copy(alpha = 0.4f),
+                radius = outerRadius - 3.dp.toPx(),
                 center = center,
                 style = Stroke(width = 1.dp.toPx())
             )
 
-            // Inner thumb stick (glowing orb)
+            // Inner thumb stick (Physical Xbox thumbstick cap representation)
             val thumbCenter = center + thumbOffset
+            
+            // Base cap: Charcoal gradient
             drawCircle(
                 brush = Brush.radialGradient(
-                    colors = listOf(Color(0xFF8A2BE2), Color(0xFF4B0082)),
+                    colors = listOf(Color(0xFF3F3F46), Color(0xFF18181B)),
                     center = thumbCenter,
                     radius = innerRadius
                 ),
                 radius = innerRadius,
                 center = thumbCenter
             )
+            
+            // The textured grip ring (concentric ridge on Xbox sticks)
             drawCircle(
-                color = Color(0xFFC084FC),
-                radius = innerRadius,
+                color = Color(0xFF10B981).copy(alpha = 0.8f), // Xbox green accent ridge
+                radius = innerRadius * 0.75f,
                 center = thumbCenter,
                 style = Stroke(width = 1.5.dp.toPx())
             )
-            // Center core
+            
+            // Subtle 4-way cardinal directional ridges on the thumbstick cap (classic Xbox controller design)
+            val ridgeLength = innerRadius * 0.2f
+            val ridgeInner = innerRadius * 0.4f
+            val ridgeOuter = innerRadius * 0.8f
+            
+            // Up ridge
+            drawLine(
+                color = Color(0xFF71717A),
+                start = Offset(thumbCenter.x, thumbCenter.y - ridgeInner),
+                end = Offset(thumbCenter.x, thumbCenter.y - ridgeOuter),
+                strokeWidth = 2.dp.toPx()
+            )
+            // Down ridge
+            drawLine(
+                color = Color(0xFF71717A),
+                start = Offset(thumbCenter.x, thumbCenter.y + ridgeInner),
+                end = Offset(thumbCenter.x, thumbCenter.y + ridgeOuter),
+                strokeWidth = 2.dp.toPx()
+            )
+            // Left ridge
+            drawLine(
+                color = Color(0xFF71717A),
+                start = Offset(thumbCenter.x - ridgeInner, thumbCenter.y),
+                end = Offset(thumbCenter.x - ridgeOuter, thumbCenter.y),
+                strokeWidth = 2.dp.toPx()
+            )
+            // Right ridge
+            drawLine(
+                color = Color(0xFF71717A),
+                start = Offset(thumbCenter.x + ridgeInner, thumbCenter.y),
+                end = Offset(thumbCenter.x + ridgeOuter, thumbCenter.y),
+                strokeWidth = 2.dp.toPx()
+            )
+
+            // Center core indentation
             drawCircle(
-                color = Color.White,
-                radius = innerRadius * 0.25f,
+                color = Color(0xFF18181B),
+                radius = innerRadius * 0.3f,
                 center = thumbCenter
             )
         }

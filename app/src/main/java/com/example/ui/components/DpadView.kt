@@ -93,12 +93,12 @@ fun DpadView(
 
             // Background Circle Disc
             drawCircle(
-                color = Color(0xFF1E1E2E),
+                color = Color(0xFF27272A),
                 radius = outerRadius,
                 center = center
             )
             drawCircle(
-                color = Color(0x33C084FC),
+                color = Color(0xFF10B981).copy(alpha = 0.3f),
                 radius = outerRadius,
                 center = center,
                 style = Stroke(width = 2.dp.toPx())
@@ -122,7 +122,7 @@ fun DpadView(
                     lineTo(center.x, center.y - h)
                     close()
                 },
-                color = if (upActive) Color(0xFF00F0FF) else Color(0xFF585B70)
+                color = if (upActive) Color(0xFF10B981) else Color(0xFF18181B)
             )
 
             // DOWN Arrow Segment
@@ -133,7 +133,7 @@ fun DpadView(
                     lineTo(center.x, center.y + h)
                     close()
                 },
-                color = if (downActive) Color(0xFF00F0FF) else Color(0xFF585B70)
+                color = if (downActive) Color(0xFF10B981) else Color(0xFF18181B)
             )
 
             // LEFT Arrow Segment
@@ -144,7 +144,7 @@ fun DpadView(
                     lineTo(center.x - h, center.y)
                     close()
                 },
-                color = if (leftActive) Color(0xFF00F0FF) else Color(0xFF585B70)
+                color = if (leftActive) Color(0xFF10B981) else Color(0xFF18181B)
             )
 
             // RIGHT Arrow Segment
@@ -155,17 +155,17 @@ fun DpadView(
                     lineTo(center.x + h, center.y)
                     close()
                 },
-                color = if (rightActive) Color(0xFF00F0FF) else Color(0xFF585B70)
+                color = if (rightActive) Color(0xFF10B981) else Color(0xFF18181B)
             )
 
             // Center Disc Core
             drawCircle(
-                color = Color(0xFF11111B),
+                color = Color(0xFF1E1E21),
                 radius = innerRadius,
                 center = center
             )
             drawCircle(
-                color = Color(0xFFC084FC),
+                color = Color(0xFF3F3F46),
                 radius = innerRadius * 0.7f,
                 center = center,
                 style = Stroke(width = 1.dp.toPx())

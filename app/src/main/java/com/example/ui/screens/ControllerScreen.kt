@@ -327,28 +327,41 @@ fun GamepadPressButton(
 
     // Interactive button colors
     val defaultBg = when (button.name) {
-        "A" -> Color(0xAA10B981) // Green
-        "B" -> Color(0xAAEF4444) // Red
-        "X" -> Color(0xAA3B82F6) // Blue
-        "Y" -> Color(0xAAFBBF24) // Yellow
-        "START", "SELECT", "BACK" -> Color(0xAA18181B)
-        else -> Color(0xAA18181B) // Bumpers & Triggers
+        "A", "B", "X", "Y" -> Color(0xFF1E1E21) // Premium matte charcoal face buttons
+        "START", "SELECT", "BACK" -> Color(0xFF121214)
+        else -> Color(0xFF121214) // Bumpers & Triggers
+    }
+
+    val buttonThemeColor = when (button.name) {
+        "A" -> Color(0xFF10B981) // Xbox Green
+        "B" -> Color(0xFFEF4444) // Xbox Red
+        "X" -> Color(0xFF3B82F6) // Xbox Blue
+        "Y" -> Color(0xFFFBBF24) // Xbox Yellow
+        else -> Color(0xFF52525B)
     }
 
     val activeBg = if (isPressed) {
+        buttonThemeColor
+    } else {
+        defaultBg
+    }
+
+    val labelColor = if (isPressed) {
+        if (button.name == "Y") Color.Black else Color.White
+    } else {
         when (button.name) {
             "A" -> Color(0xFF10B981)
             "B" -> Color(0xFFEF4444)
             "X" -> Color(0xFF3B82F6)
             "Y" -> Color(0xFFFBBF24)
-            else -> Color(0xFF6366F1) // Indigo Active Glow
+            else -> Color.White
         }
-    } else defaultBg
+    }
 
     val borderStroke = if (isEditMode) {
         BorderStroke(2.dp, if (isSelectedInEdit) Color(0xFF818CF8) else Color.DarkGray)
     } else {
-        BorderStroke(1.5.dp, if (isPressed) Color(0xFF818CF8) else Color(0xFF27272A))
+        BorderStroke(2.dp, if (isPressed) buttonThemeColor else buttonThemeColor.copy(alpha = 0.4f))
     }
 
     Box(
@@ -382,13 +395,13 @@ fun GamepadPressButton(
                     }
                 }
             }
-            .background(brush = Brush.verticalGradient(listOf(activeBg, activeBg.copy(alpha = 0.5f))), shape = CircleShape)
+            .background(brush = Brush.verticalGradient(listOf(activeBg, activeBg.copy(alpha = 0.7f))), shape = CircleShape)
             .border(borderStroke, shape = CircleShape),
         contentAlignment = Alignment.Center
     ) {
         Text(
             text = button.label,
-            color = Color.White,
+            color = labelColor,
             fontSize = if (button.sizeDp < 55) 10.sp else 14.sp,
             fontWeight = FontWeight.Bold,
             fontFamily = androidx.compose.ui.text.font.FontFamily.SansSerif,
