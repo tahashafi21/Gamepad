@@ -1,0 +1,6 @@
+{
+  "name": "Bluetooth Gamepad",
+  "description": "Turn your Android phone into a low-latency virtual Xbox gamepad for Windows and Mac, supporting custom buttons, touch sensitivity, and battery telemetry.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
